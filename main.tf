@@ -100,7 +100,7 @@ resource "google_compute_backend_service" "fullstory_relay" {
   ]
 
   log_config {
-    enable      = true
+    enable      = var.logging_enabled
     sample_rate = 1
   }
 

@@ -21,7 +21,7 @@ content: |-
   {{ include "examples/cloud_dns/main.tf" }}
   ```
   
-  > :warning: **Note:** SSL Certificates can take 10-15 minutes to become active after creation. `` errors may ge returned during this time.
+  > :warning: **Note:** SSL Certificates can take 10-15 minutes to become active after creation. Errors may be returned during this time.
   
   ### Without Cloud DNS Record Creation
   
@@ -45,6 +45,7 @@ content: |-
   
   ```bash
   gcloud compute ssl-certificates list
+  ```
   
   ### European Realm Target
   

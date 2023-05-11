@@ -20,3 +20,9 @@ variable "cloud_dns_project_id" {
   description = "(optional) The project in which the Cloud DNS zone lives in. Defaults to provider project."
   default     = null
 }
+
+variable "logging_enabled" {
+  type        = bool
+  description = "(optional) If enabled, logging will be active on the backend service. Defaults to false."
+  default     = false
+}
