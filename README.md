@@ -23,6 +23,7 @@ script configuration can be found in this KB article (TODO: add link).
 |------|-------------|------|---------|:--------:|
 | <a name="input_cloud_dns_project_id"></a> [cloud\_dns\_project\_id](#input\_cloud\_dns\_project\_id) | (optional) The project in which the Cloud DNS zone lives in. Defaults to provider project. | `string` | `null` | no |
 | <a name="input_cloud_dns_zone_name"></a> [cloud\_dns\_zone\_name](#input\_cloud\_dns\_zone\_name) | (optional) The Cloud DNS zone name for placing the DNS A record. | `string` | `null` | no |
+| <a name="input_logging_enabled"></a> [logging\_enabled](#input\_logging\_enabled) | (optional) If enabled, logging will be active on the backend service. Defaults to false. | `bool` | `false` | no |
 | <a name="input_relay_fqdn"></a> [relay\_fqdn](#input\_relay\_fqdn) | The fully qualified domain name for the relay. Example: `fsrelay.your-company.com`. | `string` | n/a | yes |
 | <a name="input_target_fqdn"></a> [target\_fqdn](#input\_target\_fqdn) | (optional) The fully qualified domain name that the relay targets. Defaults to `fullstory.com`. | `string` | `"fullstory.com"` | no |
 
@@ -38,14 +39,14 @@ script configuration can be found in this KB article (TODO: add link).
 
 ```hcl
 module "fullstory_relay" {
-  source               = "../.." #TODO: change to absolute reference
+  source               = "fullstorydev/fullstory-cloud-relay/google"
   relay_fqdn           = "fsrelay.your-company.com"
   cloud_dns_zone_name  = "your-company-com"
   cloud_dns_project_id = "gcp-your-company"
 }
 ```
 
-> :warning: **Note:** SSL Certificates can take 10-15 minutes to become active after creation. `` errors may ge returned during this time.
+> :warning: **Note:** SSL Certificates can take 10-15 minutes to become active after creation. Errors may be returned during this time.
 
 ### Without Cloud DNS Record Creation
 
@@ -53,7 +54,7 @@ By default, the module will not create a DNS record in Cloud DNS. An example of 
 
 ```hcl
 module "fullstory_relay" {
-  source     = "../.." #TODO: change to absolute reference
+  source     = "fullstorydev/fullstory-cloud-relay/google"
   relay_fqdn = "fsrelay.your-company.com"
 }
 
@@ -76,12 +77,13 @@ Once the DNS record has been created, the SSL certificate can take up to 15 minu
 
 ```bash
 gcloud compute ssl-certificates list
+```
 
 ### European Realm Target
 
 ```hcl
 module "fullstory_relay" {
-  source      = "../.." #TODO: change to absolute reference
+  source      = "fullstorydev/fullstory-cloud-relay/google"
   relay_fqdn  = "fsrelay.your-company.com"
   target_fqdn = "eu1.fullstory.com"
 }
