@@ -1,0 +1,59 @@
+formatter: "markdown"
+output:
+  file: README.md
+  mode: inject
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->
+content: |-
+  {{ .Requirements }}
+  
+  {{ .Inputs }}
+  
+  {{ .Outputs }}
+  
+  ## Usage
+  
+  ### With Cloud DNS Record Creation
+
+  ```hcl
+  {{ include "examples/cloud_dns/main.tf" }}
+  ```
+  
+  > :warning: **Note:** SSL Certificates can take 10-15 minutes to become active after creation. Errors may be returned during this time.
+  
+  ### Without Cloud DNS Record Creation
+  
+  By default, the module will not create a DNS record in Cloud DNS. An example of which is below.
+  
+  ```hcl
+  {{ include "examples/without_cloud_dns/main.tf" }}
+  ```
+  
+  Once the resources have been successfully created, the IP address can be extracted from the Terraform state using the command below.
+  
+  ```bash
+  terraform output relay_ip_address
+  ```
+  
+  If the above command does not work, ensure that the `output "relay_ip_address"` block is present as shown in the example above.
+  
+  Next, create an `A` DNS record that routes the `relay_fqdn` to the IP address found in the previous command.
+  
+  Once the DNS record has been created, the SSL certificate can take up to 15 minutes to become active. The status can be checked using the command below.
+  
+  ```bash
+  gcloud compute ssl-certificates list
+  ```
+  
+  ### European Realm Target
+  
+  ```hcl
+  {{ include "examples/europe/main.tf" }}
+  ```
+  
+  ### Validation
+  Once an instance of the FullStory Relay has been successfully created, the health endpoint at `https://<relay_fqdn>/healthz` should return a `200 OK`.
+  
+  {{ .Resources }}
