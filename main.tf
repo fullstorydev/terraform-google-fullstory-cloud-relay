@@ -1,8 +1,10 @@
 locals {
-  version           = "0.1.0" #TODO: Dynamically inject?
+  module_name = "fullstory-cloud-relay/aws"
+
+  version           = try(compact([for m in jsondecode(file("${path.module}/../modules.json"))["Modules"] : length(regexall(".${local.module_name}.*", m["Source"])) > 0 ? m["Version"] : ""])[0], "unreleased")
   create_dns_record = tobool(var.cloud_dns_zone_name != null)
   name              = "fullstory-relay"
-  endpoints         = {
+  endpoints = {
     edge : "edge.${var.target_fqdn}",
     rs : "rs.${var.target_fqdn}",
     services : "services.fullstory.com"
@@ -66,7 +68,7 @@ resource "google_dns_record_set" "fullstory_relay" {
   type         = "A"
   ttl          = 300
   managed_zone = data.google_dns_managed_zone.fullstory_relay[0].name
-  rrdatas      = [
+  rrdatas = [
     google_compute_global_address.fullstory_relay.address,
   ]
 }
