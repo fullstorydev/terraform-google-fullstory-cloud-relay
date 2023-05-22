@@ -1,5 +1,5 @@
 locals {
-  module_name = "fullstory-cloud-relay/aws"
+  module_name = "fullstory-cloud-relay/google"
 
   version           = try(compact([for m in jsondecode(file("${path.module}/../modules.json"))["Modules"] : length(regexall(".${local.module_name}.*", m["Source"])) > 0 ? m["Version"] : ""])[0], "unreleased")
   create_dns_record = tobool(var.cloud_dns_zone_name != null)
