@@ -26,7 +26,11 @@ resource "google_compute_url_map" "fullstory_relay" {
     default_service = google_compute_backend_service.fullstory_relay["rs"].id
 
     path_rule {
-      paths   = ["/s/fs.js"]
+      paths   = ["/s/*"]
+      service = google_compute_backend_service.fullstory_relay["edge"].id
+    }
+    path_rule {
+      paths   = ["/datalayer/*"]
       service = google_compute_backend_service.fullstory_relay["edge"].id
     }
     path_rule {
