@@ -1,13 +1,13 @@
-<a href="https://fullstory.com"><img src="https://d36ubspakw5kl4.cloudfront.net/fullstory.png" width="600"></a>
+<a href="https://fullstory.com"><img src="https://github.com/fullstorydev/terraform-google-fullstory-cloud-relay/blob/main/assets/fs-logo.png?raw=true"></a>
 
 # terraform-google-fullstory-cloud-relay
 
 [![GitHub release](https://img.shields.io/github/release/fullstorydev/terraform-google-fullstory-cloud-relay.svg)](https://github.com/fullstorydev/terraform-google-fullstory-cloud-relay/releases/)
 
 
-This module creates a relay that allows you to route all captured FullStory traffic
+This module creates a relay that allows you to route all captured fullstory traffic
 from your users’ browser directly through your own domain. More information on the philosophy and 
-script configuration can be found in [this KB article](https://help.fullstory.com/hc/en-us/articles/360046112593-How-to-send-captured-traffic-to-your-First-Party-Domain-using-FullStory-Relay).
+script configuration can be found in [this KB article](https://help.fullstory.com/hc/en-us/articles/360046112593-How-to-send-captured-traffic-to-your-First-Party-Domain-using-fullstory-Relay).
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
@@ -90,7 +90,7 @@ module "fullstory_relay" {
 ```
 
 ### Validation
-Once an instance of the FullStory Relay has been successfully created, the health endpoint at `https://<relay_fqdn>/healthz` should return a `200 OK`.
+Once an instance of the fullstory Relay has been successfully created, the health endpoint at `https://<relay_fqdn>/healthz` should return a `200 OK`.
 
 ## Resources
 
